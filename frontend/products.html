@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products - MyShop</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header>
+
+    <div class="logo">
+        <h1>MyShop</h1>
+    </div>
+
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="products.html">Products</a>
+        <a href="cart.html">Cart</a>
+        <a href="dashboard.html">Dashboard</a>
+    </nav>
+
+</header>
+
+<section class="search-section">
+
+    <input
+    type="text"
+    id="searchInput"
+    placeholder="Search Products..."
+    onkeyup="searchProducts()">
+
+</section>
+
+<section class="featured-products">
+
+    <h2>Our Products</h2>
+
+    <div
+    class="product-grid"
+    id="productContainer">
+
+    </div>
+
+</section>
+
+<footer>
+
+    <p>
+        &copy; 2026 MyShop.
+        All Rights Reserved.
+    </p>
+
+</footer>
+
+<script src="js/products.js"></script>
+
+</body>
+</html>

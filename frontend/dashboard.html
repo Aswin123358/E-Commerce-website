@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - MyShop</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="logo">
+            <h1>MyShop</h1>
+        </div>
+
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="products.html">Products</a>
+            <a href="cart.html">Cart</a>
+            <a href="#" onclick="logout()">Logout</a>
+        </nav>
+    </header>
+
+    <!-- Dashboard -->
+    <section class="hero">
+
+        <h2 id="welcomeMessage">
+            Welcome User
+        </h2>
+
+        <p>
+            Manage your account and continue shopping.
+        </p>
+
+    </section>
+
+    <!-- Account Information -->
+    <section class="featured-products">
+
+        <h2>Account Information</h2>
+
+        <div class="product-card">
+
+            <h3>Name</h3>
+            <p id="userName">Loading...</p>
+
+            <h3>Email</h3>
+            <p id="userEmail">Loading...</p>
+
+        </div>
+
+    </section>
+
+    <!-- Quick Links -->
+    <section class="featured-products">
+
+        <h2>Quick Actions</h2>
+
+        <div class="product-grid">
+
+            <div class="product-card">
+                <h3>Browse Products</h3>
+                <a href="products.html">
+                    <button>View Products</button>
+                </a>
+            </div>
+
+            <div class="product-card">
+                <h3>Shopping Cart</h3>
+                <a href="cart.html">
+                    <button>Open Cart</button>
+                </a>
+            </div>
+
+        </div>
+
+    </section>
+
+    <footer>
+        <p>&copy; 2026 MyShop. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+
+        const user =
+        JSON.parse(
+            localStorage.getItem("loggedInUser")
+        );
+
+        if(!user){
+
+            window.location.href =
+            "login.html";
+
+        }
+
+        document.getElementById(
+            "welcomeMessage"
+        ).innerText =
+        "Welcome, " + user.name;
+
+        document.getElementById(
+            "userName"
+        ).innerText =
+        user.name;
+
+        document.getElementById(
+            "userEmail"
+        ).innerText =
+        user.email;
+
+        function logout(){
+
+            localStorage.removeItem(
+                "loggedInUser"
+            );
+
+            alert("Logged Out Successfully");
+
+            window.location.href =
+            "login.html";
+        }
+
+    </script>
+
+</body>
+</html>

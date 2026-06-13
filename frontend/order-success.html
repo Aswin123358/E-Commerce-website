@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Success - MyShop</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="logo">
+            <h1>MyShop</h1>
+        </div>
+
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="products.html">Products</a>
+        </nav>
+    </header>
+
+    <!-- Success Section -->
+    <section class="featured-products">
+
+        <div class="product-card">
+
+            <h1>🎉 Order Placed Successfully!</h1>
+
+            <p>
+                Thank you for shopping with MyShop.
+            </p>
+
+            <hr>
+
+            <h2>Customer Details</h2>
+
+            <p>
+                <strong>Name:</strong>
+                <span id="customerName"></span>
+            </p>
+
+            <p>
+                <strong>Phone:</strong>
+                <span id="customerPhone"></span>
+            </p>
+
+            <p>
+                <strong>Address:</strong>
+                <span id="customerAddress"></span>
+            </p>
+
+            <hr>
+
+            <h2>Order Summary</h2>
+
+            <div id="orderItems"></div>
+
+            <h3 id="totalAmount"></h3>
+
+            <br>
+
+            <a href="products.html">
+                <button>
+                    Continue Shopping
+                </button>
+            </a>
+
+        </div>
+
+    </section>
+
+    <footer>
+        <p>&copy; 2026 MyShop. All Rights Reserved.</p>
+    </footer>
+
+<script>
+
+const order =
+JSON.parse(
+localStorage.getItem("lastOrder")
+);
+
+if(!order){
+
+    window.location.href =
+    "products.html";
+}
+
+document.getElementById(
+"customerName"
+).innerText =
+order.customerName;
+
+document.getElementById(
+"customerPhone"
+).innerText =
+order.phone;
+
+document.getElementById(
+"customerAddress"
+).innerText =
+order.address;
+
+let itemsHTML = "";
+
+order.products.forEach(item => {
+
+    itemsHTML += `
+        <div class="product-card">
+            <h4>${item.name}</h4>
+            <p>₹${item.price}</p>
+        </div>
+    `;
+});
+
+document.getElementById(
+"orderItems"
+).innerHTML =
+itemsHTML;
+
+document.getElementById(
+"totalAmount"
+).innerText =
+"Total Paid: ₹" +
+order.totalAmount;
+
+</script>
+
+</body>
+</html>

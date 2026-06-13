@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - MyShop</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="logo">
+            <h1>MyShop</h1>
+        </div>
+
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="products.html">Products</a>
+            <a href="cart.html">Cart</a>
+        </nav>
+    </header>
+
+    <!-- Checkout Section -->
+    <section class="featured-products">
+
+        <h2>Checkout</h2>
+
+        <form id="checkoutForm">
+
+            <input
+                type="text"
+                id="name"
+                placeholder="Full Name"
+                required>
+
+            <br><br>
+
+            <textarea
+                id="address"
+                placeholder="Delivery Address"
+                rows="4"
+                required></textarea>
+
+            <br><br>
+
+            <input
+                type="tel"
+                id="phone"
+                placeholder="Phone Number"
+                required>
+
+            <br><br>
+
+            <h3>Order Summary</h3>
+
+            <div id="orderSummary"></div>
+
+            <h3 id="totalAmount">
+                Total: ₹0
+            </h3>
+
+            <br>
+
+            <button type="submit">
+                Place Order
+            </button>
+
+        </form>
+
+    </section>
+
+    <footer>
+        <p>&copy; 2026 MyShop. All Rights Reserved.</p>
+    </footer>
+
+<script>
+
+let cart =
+JSON.parse(
+localStorage.getItem("cart")
+) || [];
+
+let total = 0;
+
+const summary =
+document.getElementById(
+"orderSummary"
+);
+
+if(cart.length === 0){
+
+    summary.innerHTML =
+    "<p>No products in cart.</p>";
+
+}else{
+
+    cart.forEach(item => {
+
+        total += item.price;
+
+        summary.innerHTML += `
+
+        <div class="product-card">
+
+            <h4>${item.name}</h4>
+
+            <p>₹${item.price}</p>
+
+        </div>
+
+        `;
+    });
+
+    document.getElementById(
+    "totalAmount"
+    ).innerText =
+    "Total: ₹" + total;
+}
+
+document
+.getElementById("checkoutForm")
+.addEventListener("submit",
+function(e){
+
+    e.preventDefault();
+
+    const order = {
+
+        customerName:
+        document.getElementById("name").value,
+
+        address:
+        document.getElementById("address").value,
+
+        phone:
+        document.getElementById("phone").value,
+
+        products: cart,
+
+        totalAmount: total,
+
+        orderDate:
+        new Date().toLocaleString()
+    };
+
+    localStorage.setItem(
+        "lastOrder",
+        JSON.stringify(order)
+    );
+
+    localStorage.removeItem("cart");
+
+    alert(
+    "Order Placed Successfully!"
+    );
+
+    window.location.href =
+    "order-success.html";
+
+});
+
+</script>
+
+</body>
+</html>
